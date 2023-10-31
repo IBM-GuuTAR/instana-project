@@ -16,8 +16,6 @@ FROM nginxinc/nginx-unprivileged
 
 WORKDIR /usr/share/nginx/html
 
-RUN rm -rf ./*
-
 COPY --from=build-stage /usr/app/build .
 
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
