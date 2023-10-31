@@ -12,7 +12,7 @@ ENV PATH /usr/src/app/node_modules/.bin:$PATH
 
 RUN npm run build
 
-FROM nginx:alpine
+FROM nginxinc/nginx-unprivileged 
 
 WORKDIR /usr/share/nginx/html
 
