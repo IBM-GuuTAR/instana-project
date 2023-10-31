@@ -10,6 +10,7 @@ app.get('/', (_, res) => {
 
 app.post('/webhook', (req, res) => {
     console.log(req.body)
+    res.send({'message': 'my webhook!'}).end()
 })
 
 app.listen(PORT, () => {
