@@ -1,0 +1,15 @@
+p {
+    margin: 16px;
+}
+
+.Warning-card {
+    padding: 4px;
+    background-color: #FFFF8F;
+    color: black;
+}
+
+.Error-card {
+    padding: 4px;
+    background-color: #F88379;
+    color: black;
+}
