@@ -20,14 +20,26 @@ export const useAlerts = () => {
         }
     
         const onAlert = ({ issue }) => {
-          console.log(issue.id)
-          if (issue.severity === 5) {
-            playWarningSound()
-            setWarningAlerts((oldState) => [...oldState, { source: issue.entityLabel, reason: issue.text, severity: issue.severity }])
+          const { id, state, severity, entityLabel, text } = issue
+          console.log(`Alert id=${id} (${state}) }`)
+
+          if (state === 'OPEN') {
+            if (severity === 5) {
+              playWarningSound()
+              setWarningAlerts((currState) => [{ id: id, source: entityLabel, reason: text, severity: severity }, ...currState])
+            }
+            else if (severity === 10) {
+              playErrorSound()
+              setErrorAlerts((currState) => [{ id: id, source: entityLabel, reason: text, severity: severity }, ...currState])
+            }
           }
-          else if (issue.severity === 10) {
-            playErrorSound()
-            setErrorAlerts((oldState) => [...oldState, { source: issue.entityLabel, reason: issue.text, severity: issue.severity }])
+          else if (state === 'CLOSED') {
+            if (severity === 5) {
+              setWarningAlerts((currState) => currState.filter(alert => alert.id !== id))
+            }
+            else if (severity === 10) {
+              setErrorAlerts((currState) => currState.filter(alert => alert.id !== id))
+            }
           }
         }
     
