@@ -2,13 +2,14 @@ import { useState, useEffect } from 'react'
 import socketIOClient from 'socket.io-client'
 
 import { playErrorSound, playWarningSound } from "../services/playSound"
+import { BACKEND_URL } from '../config/config'
 
 export const useAlerts = () => {
     const [warningAlerts, setWarningAlerts] = useState([])
     const [errorAlerts, setErrorAlerts] = useState([])
 
     useEffect(() => {
-        const socket = socketIOClient('http://localhost:8080/')
+        const socket = socketIOClient(BACKEND_URL ?? 'http://localhost:8080/')
     
         const onConnect = () => {
             console.log('Ready to listen alerting')
