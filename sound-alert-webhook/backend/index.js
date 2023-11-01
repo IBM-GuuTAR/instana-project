@@ -66,6 +66,8 @@ app.post("/webhook", (req, res) => {
   //   },
   // })
 
+  console.log("New alert alive", req.body)
+
   io.emit("alert", req.body)
 
   res.send({ message: "my webhook!" }).end()
