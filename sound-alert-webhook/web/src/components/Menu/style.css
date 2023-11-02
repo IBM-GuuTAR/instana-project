@@ -1,0 +1,9 @@
+.Text-button {
+    background-color: transparent;
+    border-color: transparent;
+    color: white;
+}
+
+.Text-button:hover {
+    text-decoration: underline;
+}

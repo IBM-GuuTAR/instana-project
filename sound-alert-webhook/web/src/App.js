@@ -1,13 +1,10 @@
 import { useState } from "react"
 
 import "./App.css"
-import { ErrorAlertCard, WarningAlertCard } from "./components/AlertCard"
 import { playWarningSound, playErrorSound } from "./services/playSound"
-import { useAlerts } from "./hooks/useAlerts"
+import { Menu } from "./components/Menu"
 
 function App() {
-  const { warningAlerts, errorAlerts } = useAlerts()
-
   const [isEnabled, setIsEnabled] = useState(false)
 
   return (
@@ -24,24 +21,7 @@ function App() {
               <button onClick={playWarningSound}>Warning Sound</button>
               <button onClick={playErrorSound}>Error Sound</button>
             </div>
-            <div className="Flex-row" style={{ gap: "16px" }}>
-              <div
-                className="Flex-col"
-                style={{ gap: "16px", marginTop: "32px" }}
-              >
-                {warningAlerts.map((alert, idx) => (
-                  <WarningAlertCard key={idx} {...alert} />
-                ))}
-              </div>
-              <div
-                className="Flex-col"
-                style={{ gap: "16px", marginTop: "32px" }}
-              >
-                {errorAlerts.map((alert, idx) => (
-                  <ErrorAlertCard key={idx} {...alert} />
-                ))}
-              </div>
-            </div>
+            <Menu />
           </>
         ) : (
           <div>

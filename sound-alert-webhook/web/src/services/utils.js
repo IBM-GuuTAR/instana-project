@@ -1,8 +1,8 @@
 export const severityToText = () => {
     if (issue.severity === 5) {
-        return "warning"
+        return "Warning"
     }
     else if (issue.severity === 10) {
-        return "error"
+        return "Error"
     }
 }

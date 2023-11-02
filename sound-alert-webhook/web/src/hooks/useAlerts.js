@@ -8,6 +8,8 @@ export const useAlerts = () => {
     const [warningAlerts, setWarningAlerts] = useState([])
     const [errorAlerts, setErrorAlerts] = useState([])
 
+    const [allAlerts, setAllAlerts] = useState([])
+
     useEffect(() => {
         const socket = socketIOClient(BACKEND_URL ?? 'http://localhost:8080/')
     
@@ -20,8 +22,12 @@ export const useAlerts = () => {
         }
     
         const onAlert = ({ issue }) => {
-          const { id, state, severity, entityLabel, text } = issue
-          console.log(`Alert id=${id} (${state}) }`)
+          if (!issue) return
+
+          const { id, state, severity, entityLabel, text, start } = issue
+          console.log(`Alert id=${id} (${state})`)
+
+          setAllAlerts((currState) => [{ id: id, source: entityLabel, reason: text, severity: severity, state: state, timestamp: start }, ...currState])
 
           if (state === 'OPEN') {
             if (severity === 5) {
@@ -54,5 +60,5 @@ export const useAlerts = () => {
         }
       }, [])
 
-      return { warningAlerts, errorAlerts }
+      return { allAlerts, warningAlerts, errorAlerts }
 }

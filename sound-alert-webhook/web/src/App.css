@@ -43,6 +43,7 @@ h2 {
 
 button {
   height: 30px;
+  cursor: pointer;
 }
 
 @keyframes App-logo-spin {
